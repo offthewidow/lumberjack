@@ -2,8 +2,6 @@ package lumberjack
 
 import "fmt"
 
-type Level uint8
-
 const (
   LevelFatal Level = iota
   LevelError
@@ -11,6 +9,8 @@ const (
   LevelInfo
   LevelDebug
 )
+
+type Level uint8
 
 func formatLevel(lvl Level, pretty bool) string {
   switch lvl {
