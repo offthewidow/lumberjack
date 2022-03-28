@@ -1,9 +1,12 @@
 package log
 
-import "strings"
-
 func shouldQuote(s string) bool {
-  return s == "" || strings.IndexRune(s, ' ') != -1
+  for _, r := range s {
+    if r == ' ' {
+      return true
+    }
+  }
+  return s == ""
 }
 
 func appendString(dst []byte, s string, quote bool) []byte {
