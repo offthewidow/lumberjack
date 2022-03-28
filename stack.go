@@ -35,7 +35,7 @@ func captureStackTrace(skip int) string {
   frame, more := frames.Next()
 
   var (
-    b     strings.Builder
+    b strings.Builder
     first = true
   )
 
