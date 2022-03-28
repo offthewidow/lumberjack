@@ -1,4 +1,4 @@
-package log
+package lumberjack
 
 func shouldQuote(s string) bool {
   for _, r := range s {
