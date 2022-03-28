@@ -7,7 +7,7 @@ import (
 )
 
 var entryPool = sync.Pool{
-  New: func() interface{} {
+  New: func() any {
     return newEntry()
   },
 }

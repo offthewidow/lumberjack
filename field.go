@@ -3,7 +3,7 @@ package lumberjack
 import "sync"
 
 var fieldPool = sync.Pool{
-  New: func() interface{} {
+  New: func() any {
     return new(field)
   },
 }
