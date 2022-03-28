@@ -22,7 +22,7 @@ type entry struct {
 func newEntry() *entry {
   return &entry{
     fields: make(map[string]*field),
-    buf:    make([]byte, 0, 512),
+    buf: make([]byte, 0, 512),
   }
 }
 
