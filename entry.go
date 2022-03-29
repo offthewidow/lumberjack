@@ -126,29 +126,33 @@ func (e *entry) Trace() *entry {
 }
 
 func (e *entry) Err(err error) *entry {
-  if err == nil {
-    return e.Str("err", "nil")
+  if e == nil {
+    return nil
   }
-  return e.Str("err", err.Error())
+  if err == nil {
+    return e.str("err", false, "nil", false)
+  }
+  v := err.Error()
+  return e.str("err", false, v, shouldQuote(v))
 }
 
 func (e *entry) Int(k string, v int) *entry {
   if e == nil {
     return e
   }
-  return e.Str(k, strconv.FormatInt(int64(v), 10))
+  return e.str(k, shouldQuote(k), strconv.FormatInt(int64(v), 10), false)
 }
 
 func (e *entry) Uint16(k string, v uint16) *entry {
   if e == nil {
     return e
   }
-  return e.Str(k, strconv.FormatUint(uint64(v), 10))
+  return e.str(k, shouldQuote(k), strconv.FormatUint(uint64(v), 10), false)
 }
 
 func (e *entry) Uint64(k string, v uint64) *entry {
   if e == nil {
     return e
   }
-  return e.Str(k, strconv.FormatUint(v, 10))
+  return e.str(k, shouldQuote(k), strconv.FormatUint(v, 10), false)
 }
