@@ -15,7 +15,6 @@ func captureStackTrace(skip int) string {
 
   n := runtime.Callers(skip+1, pcs[:])
   frames := runtime.CallersFrames(pcs[:n])
-  frame, more := frames.Next()
 
   var (
     b strings.Builder
@@ -25,10 +24,13 @@ func captureStackTrace(skip int) string {
   b.Grow(1 + 24 * (n - 1) + 1) // allocate 24 initial bytes per frame + 2 more bytes for the square brackets
   b.WriteRune('[')
 
-  for more {
-    frame, more = frames.Next()
-    file := frame.File
+  for {
+    frame, more := frames.Next()
+    if !more {
+      break
+    }
 
+    file := frame.File
     if strings.HasPrefix(file, goroot) {
       continue
     }
