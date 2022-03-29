@@ -11,19 +11,14 @@ func shouldQuote(s string) bool {
 
 func appendString(dst []byte, s string, quote bool) []byte {
   if quote {
-    dst = append(dst, '"')
+    return append(append(append(dst, '"'), s...), '"')
   }
-  dst = append(dst, s...)
-  if quote {
-    dst = append(dst, '"')
-  }
-  return dst
+  return append(dst, s...)
 }
 
 func appendKey(dst []byte, k string, quote bool, pretty bool) []byte {
-  dst = append(dst, ' ')
   if pretty {
-    return append(append(appendString(append(dst, "\x1b[90m"...), k, quote), '='), "\x1b[0m"...)
+    return append(append(appendString(append(append(dst, ' '), "\x1b[90m"...), k, quote), '='), "\x1b[0m"...)
   }
-  return append(appendString(dst, k, quote), '=')
+  return append(appendString(append(dst, ' '), k, quote), '=')
 }
