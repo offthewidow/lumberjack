@@ -1,5 +1,16 @@
 package lumberjack
 
+import "time"
+
+const timestampFormat = time.RFC3339
+
+func appendTimestamp(dst []byte, pretty bool) []byte {
+  if pretty {
+    return append(now().AppendFormat(append(dst, "\x1b[90m"...), timestampFormat), "\x1b[0m "...)
+  }
+  return append(now().AppendFormat(dst, timestampFormat), ' ')
+}
+
 func shouldQuote(s string) bool {
   for _, r := range s {
     if r == ' ' {

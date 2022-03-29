@@ -1,7 +1,5 @@
 package lumberjack
 
-import "time"
-
 type Logger struct{
   cfg Config
   ctx *entry
@@ -53,7 +51,7 @@ func (l *Logger) Log(lvl Level, msg string) *entry {
 
   e := entryPool.Get().(*entry)
   e.logger = l
-  e.buf = append(append(now().AppendFormat(append(e.buf, "\x1b[90m"...), time.RFC3339), "\x1b[0m "...), formatLevel(lvl, cfg.Pretty)...)
+  e.buf = append(appendTimestamp(e.buf, cfg.Pretty), formatLevel(lvl, cfg.Pretty)...)
 
   e.str("msg", false, msg, shouldQuote(msg))
 
