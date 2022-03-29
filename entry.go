@@ -127,13 +127,23 @@ func (e *entry) Trace() *entry {
 
 func (e *entry) Err(err error) *entry {
   if e == nil {
-    return nil
+    return e
   }
   if err == nil {
     return e.str("err", false, "nil", false)
   }
   v := err.Error()
   return e.str("err", false, v, shouldQuote(v))
+}
+
+func (e *entry) Bool(k string, v bool) *entry {
+  if e == nil {
+    return e
+  }
+  if v {
+    return e.str(k, shouldQuote(k), "true", false)
+  }
+  return e.str(k, shouldQuote(k), "false", false)
 }
 
 func (e *entry) Int(k string, v int) *entry {
