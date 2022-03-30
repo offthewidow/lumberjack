@@ -44,7 +44,7 @@ func (e *entry) Flush() {
 
   for k, f := range e.fields {
     delete(e.fields, k)
-    fieldPool.Put(f)
+    putField(f)
   }
 
   if cap(buf) <= 1<<16 {
@@ -103,10 +103,7 @@ func (e *entry) str(k string, kquote bool, v string, vquote bool) *entry {
   buf := e.buf
   e.buf = appendString(appendKey(buf, k, kquote, pretty), v, vquote)
 
-  f := fieldPool.Get().(*field)
-  f.start = len(buf)
-  f.end = len(e.buf)
-  e.fields[k] = f
+  e.fields[k] = getField(len(buf), len(e.buf))
 
   return e
 }
