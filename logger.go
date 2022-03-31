@@ -75,7 +75,7 @@ func (l *Logger) Fatal(msg string) *entry {
 }
 
 func (l *Logger) Fatalf(format string, a ...any) *entry {
-  return l.Fatal(fmt.Sprintf(format, a))
+  return l.Fatal(fmt.Sprintf(format, a...))
 }
 
 func (l *Logger) Error(msg string) *entry {
@@ -83,7 +83,7 @@ func (l *Logger) Error(msg string) *entry {
 }
 
 func (l *Logger) Errorf(format string, a ...any) *entry {
-  return l.Error(fmt.Sprintf(format, a))
+  return l.Error(fmt.Sprintf(format, a...))
 }
 
 func (l *Logger) Warn(msg string) *entry {
@@ -91,7 +91,7 @@ func (l *Logger) Warn(msg string) *entry {
 }
 
 func (l *Logger) Warnf(format string, a ...any) *entry {
-  return l.Warn(fmt.Sprintf(format, a))
+  return l.Warn(fmt.Sprintf(format, a...))
 }
 
 func (l *Logger) Info(msg string) *entry {
@@ -99,7 +99,7 @@ func (l *Logger) Info(msg string) *entry {
 }
 
 func (l *Logger) Infof(format string, a ...any) *entry {
-  return l.Info(fmt.Sprintf(format, a))
+  return l.Info(fmt.Sprintf(format, a...))
 }
 
 func (l *Logger) Debug(msg string) *entry {
@@ -107,5 +107,5 @@ func (l *Logger) Debug(msg string) *entry {
 }
 
 func (l *Logger) Debugf(format string, a ...any) *entry {
-  return l.Debug(fmt.Sprintf(format, a))
+  return l.Debug(fmt.Sprintf(format, a...))
 }
