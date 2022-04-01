@@ -70,7 +70,9 @@ func (l *Logger) Log(lvl Level, msg string) *entry {
 
 func (l *Logger) Fatal(msg string) *entry {
   e := l.Log(LevelFatal, msg)
-  e.exit = true
+  if e != nil {
+    e.exit = true
+  }
   return e
 }
 
