@@ -1,3 +1,3 @@
-module github.com/mksdv/lumberjack
+module github.com/samueledellavedova/lumberjack
 
 go 1.18
