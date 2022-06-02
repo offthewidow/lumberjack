@@ -12,13 +12,13 @@ type field struct{
   start, end int
 }
 
-func getField(start, end int) *field {
+func acquireField(start, end int) *field {
   f := fieldPool.Get().(*field)
   f.start = start
   f.end = end
   return f
 }
 
-func putField(f *field) {
+func releaseField(f *field) {
   fieldPool.Put(f)
 }
